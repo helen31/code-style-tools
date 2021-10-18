@@ -1,0 +1,125 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/environments/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/component-class-suffix": "warn",
+        "@angular-eslint/directive-class-suffix": "warn",
+        "@angular-eslint/contextual-lifecycle": "warn",
+        "@angular-eslint/directive-selector": ["error", {"type": "attribute", "prefix": "app", "style": "camelCase"}],
+        "@angular-eslint/component-selector": ["error", {"type": "element", "prefix": "app", "style": "kebab-case"}],
+        "@angular-eslint/no-conflicting-lifecycle": "warn",
+        "@angular-eslint/no-host-metadata-property": "warn",
+        "@angular-eslint/no-input-rename":  "warn",
+        "@angular-eslint/no-inputs-metadata-property": "warn",
+        "@angular-eslint/no-output-native": "error",
+        "@angular-eslint/no-output-on-prefix": "warn",
+        "@angular-eslint/no-output-rename": "warn",
+        "@angular-eslint/no-outputs-metadata-property": "warn",
+        "@angular-eslint/use-lifecycle-interface":  "warn",
+        "@angular-eslint/use-pipe-transform-interface": "warn",
+        "no-restricted-imports": ["error", "rxjs/Rx"],
+        "@typescript-eslint/explicit-member-accessibility": ["warn", { "overrides": { "properties": "no-public", "methods": "no-public"}}],
+        "@typescript-eslint/member-ordering": [
+          "warn", { "default": ["public-field", "protected-field", "private-field", "constructor" ,"method"] }
+        ],
+        // enforces newlines between the operands of a ternary expression if the expression spans multiple lines
+        "multiline-ternary": ["warn", "always-multiline"],
+        "arrow-parens": ["error", "as-needed"],
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "@typescript-eslint/no-inferrable-types": ["warn", {"ignoreProperties": false, "ignoreParameters": false}],
+        "no-use-before-define": "warn",
+        "@typescript-eslint/no-var-requires": "warn",
+        "quote-props": ["warn", "as-needed"],
+        "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+        "no-restricted-syntax": ["error", { "selector": "ExportDefaultDeclaration", "message": "Use named exports" }],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          // forbid leading and trailing underscores and enforce camelCase on EVERY name. will be overridden by subtypes if needed
+          {
+            "selector": "default",
+            "format": ["camelCase"],
+            "leadingUnderscore": "forbid",
+            "trailingUnderscore": "forbid"
+          },
+          // require all global constants to be camelCase or UPPER_CASE
+          // all other variables and functions still need to be camelCase
+          {"selector": "variable", "modifiers": ["global", "const"],  "format": ["camelCase", "UPPER_CASE"]},
+          // override the above format option for exported constants to allow only UPPER_CASE
+          {"selector": "variable", "modifiers": ["exported", "const"], "format": ["UPPER_CASE"]},
+          // require exported constant variables that are initialized with functions to be camelCase
+          {"selector": "variable", "modifiers": ["exported", "const"],
+            "types": ["function"],
+            "format": ["camelCase"]},
+          // require leading underscores for private properties, all other rules still apply
+          {"selector": "classProperty", "modifiers": ["private"], "leadingUnderscore": "require", "format": null},
+          // same for protected
+          {"selector": "classProperty", "modifiers": ["protected"], "leadingUnderscore": "require", "format": null},
+          // exclicitly disable the format check only for method toJSON
+          {"selector": "method", "filter": "^toJSON$", "format": null},
+          // enforce UPPER_CASE for all public static readonly(!) properties
+          {"selector": "classProperty", "modifiers": ["public", "static", "readonly"], "format": ["UPPER_CASE"]},
+          // enforce PascalCase for classes, interfaces, enums, etc. Remember, there are still no underscores allowed.
+          {"selector": "typeAlias", "format": ["PascalCase"]},
+          //  class name must be valid PascalCase
+          {"selector": "class", "format": ["PascalCase"]},
+          // abstract classes must have the prefix "Abstract"
+          {"selector": "class", "modifiers": ["abstract"], "prefix": ["Abstract"], "format": null},
+          // generic type parameters must start with "T"
+          // most of the time it will only be T, which is totally valid, because an empty string conforms to the PascalCase check
+          // By convention T, U and V are used for generics. You could enforce that with "regex": "^[TUV]$" and if you are care that much for performance, you could disable every other check by setting a falsy value
+          {"selector": "typeParameter", "prefix": ["T"],  "format": null},
+          {
+            "selector": "interface",
+            "format": ["PascalCase"],
+            "prefix": ["I"]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-negated-async": "error",
+        "@angular-eslint/template/banana-in-box": "error"
+      }
+    }
+  ]
+}
