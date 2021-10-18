@@ -8,4 +8,6 @@ export type UserNames = 'Danulo' | 'Ivan';
 //
 // };
 
-export const setUserToken= () => {return 'test'};
+export const setUserToken = () => {
+  return 'test';
+};
